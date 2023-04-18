@@ -34,13 +34,82 @@ public class Course implements Serializable {
     public int getPrice() {
         return price;
     }
-        public Course(String courseName, int duration, CourseType type, String description, Teacher teacher, int studentsCount, int price) {
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseName='" + courseName + '\'' +
+                ", duration=" + duration +
+                ", type=" + type +
+                ", description='" + description + '\'' +
+                ", teacher=" + teacher +
+                ", price=" + price +
+                '}';
+    }
+
+    public Course(String courseName, int duration, CourseType type, String description, Teacher teacher, int studentsCount, int price) {
         this.courseName = courseName;
         this.duration = duration;
         this.type = type;
         this.description = description;
         this.teacher = teacher;
         this.studentsCount = studentsCount;
+        this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public CourseType getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public int getStudentsCount() {
+        return studentsCount;
+    }
+
+    public int getPricePerHour() {
+        return pricePerHour;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setType(CourseType type) {
+        this.type = type;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public void setPrice(int price) {
         this.price = price;
     }
 }

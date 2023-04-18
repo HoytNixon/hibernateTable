@@ -24,5 +24,6 @@
         <mapping class="hbrnt.entity.Teacher"></mapping>
         <mapping class="hbrnt.entity.PurchaseList"></mapping>
         <mapping class="hbrnt.entity.Course"></mapping>
+        <mapping class="hbrnt.entity.LinkedPurchaseList"></mapping>
     </session-factory>
 </hibernate-configuration>
