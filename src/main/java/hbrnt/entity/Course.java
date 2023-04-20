@@ -3,8 +3,6 @@ package hbrnt.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "Courses")
@@ -13,22 +11,36 @@ public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name="name", length = 500)
-    private String courseName;
+    private String name;
     private int duration;
     @Enumerated(EnumType.STRING)
     private CourseType type;
     @Column(length = 500)
     private String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Teacher_ID", referencedColumnName = "id")
     private Teacher teacher;
     @Column(name = "students_count")
     private int studentsCount;
     private int price;
     @Column(name = "price_per_hour")
-    private int pricePerHour= price/ duration;
+    private int pricePerHour;
+    public Course() {
+    }
+
     public Course(Teacher teacher) {
         this.teacher= teacher;
+    }
+
+    public Course(String name, int duration, CourseType type, String description, Teacher teacher, int studentsCount, int price, int pricePerHour) {
+        this.name = name;
+        this.duration = duration;
+        this.type = type;
+        this.description = description;
+        this.teacher = teacher;
+        this.studentsCount = studentsCount;
+        this.price = price;
+        this.pricePerHour = pricePerHour;
     }
 
     public int getPrice() {
@@ -38,7 +50,7 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "Course{" +
-                "courseName='" + courseName + '\'' +
+                "name='" + name + '\'' +
                 ", duration=" + duration +
                 ", type=" + type +
                 ", description='" + description + '\'' +
@@ -47,22 +59,12 @@ public class Course implements Serializable {
                 '}';
     }
 
-    public Course(String courseName, int duration, CourseType type, String description, Teacher teacher, int studentsCount, int price) {
-        this.courseName = courseName;
-        this.duration = duration;
-        this.type = type;
-        this.description = description;
-        this.teacher = teacher;
-        this.studentsCount = studentsCount;
-        this.price = price;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getName() {
+        return name;
     }
 
     public int getDuration() {
@@ -89,8 +91,8 @@ public class Course implements Serializable {
         return pricePerHour;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDuration(int duration) {

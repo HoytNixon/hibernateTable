@@ -1,5 +1,6 @@
 package hbrnt;
 
+import hbrnt.entity.LinkedPurchaseList;
 import hbrnt.entity.PurchaseList;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -15,12 +16,17 @@ public class Main
     {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.getTransaction().begin();
+
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<PurchaseList> criteria = cb.createQuery(PurchaseList.class);
         Root<PurchaseList> root = criteria.from(PurchaseList.class);
         criteria.select(root);
         List<PurchaseList> purchases = session.createQuery(criteria).getResultList();
-        purchases.stream().forEach(System.out::println);
+        purchases.stream().forEach(p-> session.persist(new LinkedPurchaseList(p.getStudent(), p.getCourse())));
+
+
+        session.getTransaction().commit();
+        session.close();
         HibernateUtil.shutdown();
     }
 }
