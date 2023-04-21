@@ -1,6 +1,7 @@
 package hbrnt.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Formula;
 
 import java.io.Serializable;
 
@@ -24,6 +25,7 @@ public class Course implements Serializable {
     private int studentsCount;
     private int price;
     @Column(name = "price_per_hour")
+    @Formula("price / duration")
     private int pricePerHour;
     public Course() {
     }

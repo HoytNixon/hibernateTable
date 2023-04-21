@@ -1,9 +1,6 @@
 package hbrnt.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,13 +13,20 @@ public class Subscription implements Serializable {
     @EmbeddedId
     private SubscriptionKey id;
 
-    @Column(name = "student_id", insertable = false, updatable = false)
+    @JoinColumn(name = "student_id", insertable = false, updatable = false)
     private Student student;
 
-    @Column (name = "course_id", insertable = false, updatable = false)
+    @JoinColumn(name = "course_id", insertable = false, updatable = false)
     private Course course;
     public Subscription() {
     }
+
+    public Subscription(Date subscriptionDate, Student student, Course course) {
+        this.subscriptionDate = subscriptionDate;
+        this.student = student;
+        this.course = course;
+    }
+
     public Date getSubscription_date() {
         return subscriptionDate;
     }
