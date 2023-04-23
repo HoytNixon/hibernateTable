@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="Students")
@@ -19,6 +21,8 @@ public class Student implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date registrationDate= new Date();
 
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+    public Set<Subscription> subscriptedCourses = new HashSet<>();
     protected Student() {
     }
 
@@ -71,5 +75,10 @@ public class Student implements Serializable {
         result = 31 * result + getAge();
         result = 31 * result + getRegistration_date().hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Студент " + name + "--" + age + " лет";
     }
 }

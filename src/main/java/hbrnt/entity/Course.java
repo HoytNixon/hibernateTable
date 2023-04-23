@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Formula;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Courses")
@@ -27,6 +29,8 @@ public class Course implements Serializable {
     @Column(name = "price_per_hour")
     @Formula("price / duration")
     private int pricePerHour;
+    @OneToMany(mappedBy ="course", cascade = CascadeType.ALL)
+    public Set<Subscription> subscriptedStudents = new HashSet<>();
     public Course() {
     }
 
@@ -44,6 +48,11 @@ public class Course implements Serializable {
         this.price = price;
         this.pricePerHour = pricePerHour;
     }
+
+    public Set<Subscription> getStudents() {
+        return subscriptedStudents;
+    }
+
 
     public int getPrice() {
         return price;

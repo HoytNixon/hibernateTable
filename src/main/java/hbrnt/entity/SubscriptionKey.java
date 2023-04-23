@@ -6,31 +6,31 @@ import java.io.Serializable;
 
 public class SubscriptionKey implements Serializable {
     @Column(name = "student_id")
-    private int studentId;
+    public Long studentId;
     @Column(name="course_id")
-    private int courseId;
+    public Long courseId;
 
     public SubscriptionKey() {
     }
 
-    public SubscriptionKey(int studentId, int courseId) {
+    public SubscriptionKey(Long studentId, Long courseId) {
         this.studentId = studentId;
         this.courseId = courseId;
     }
 
-    public int getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
-    public int getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 
@@ -45,8 +45,8 @@ public class SubscriptionKey implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = getStudentId();
-        result = 31 * result + getCourseId();
+        int result = getStudentId().hashCode();
+        result = 31 * result + getCourseId().hashCode();
         return result;
     }
 }
